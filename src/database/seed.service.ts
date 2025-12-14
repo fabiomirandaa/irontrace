@@ -18,7 +18,7 @@ export class SeedService implements OnModuleInit {
 
   private async seedBodyParts() {
     const count = await this.bodyPartRepository.count();
-    
+
     if (count > 0) {
       this.logger.log('Body parts already seeded, skipping...');
       return;
@@ -34,7 +34,7 @@ export class SeedService implements OnModuleInit {
       { name: 'Thigh', isUnilateral: true },
       { name: 'Calf', isUnilateral: true },
       { name: 'Glute', isUnilateral: true },
-      
+
       // Center/bilateral
       { name: 'Waist', isUnilateral: false },
       { name: 'Hips', isUnilateral: false },

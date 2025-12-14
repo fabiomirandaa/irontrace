@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { BodyPart } from '../entities/body-part.entity';
 import { MeasurementLog } from '../entities/measurement-log.entity';
 import { MeasurementValue } from '../entities/measurement-value.entity';
+import { User } from '../entities/user.entity';
 
 export const getDatabaseConfig = (): TypeOrmModuleOptions => ({
   type: 'postgres',
@@ -10,7 +11,7 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => ({
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_NAME || 'irontrace',
-  entities: [BodyPart, MeasurementLog, MeasurementValue],
+  entities: [BodyPart, MeasurementLog, MeasurementValue, User],
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
 });

@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsString,
   IsDateString,
   IsArray,
   ValidateNested,
@@ -32,10 +31,6 @@ export class MeasurementValueDto {
 }
 
 export class CreateMeasurementDto {
-  @ApiProperty({ description: 'User ID', example: 'user123' })
-  @IsString()
-  userId: string;
-
   @ApiProperty({
     description: 'Measurement date',
     example: '2024-01-15T10:00:00Z',

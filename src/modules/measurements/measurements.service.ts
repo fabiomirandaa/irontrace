@@ -18,7 +18,10 @@ export class MeasurementsService {
     private dataSource: DataSource,
   ) {}
 
-  async createMeasurement(createMeasurementDto: CreateMeasurementDto) {
+  async createMeasurement(
+    userId: string,
+    createMeasurementDto: CreateMeasurementDto,
+  ) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -38,7 +41,7 @@ export class MeasurementsService {
 
       // Create measurement log
       const log = queryRunner.manager.create(MeasurementLog, {
-        userId: createMeasurementDto.userId,
+        userId: userId,
         date: new Date(createMeasurementDto.date),
       });
       const savedLog = await queryRunner.manager.save(log);

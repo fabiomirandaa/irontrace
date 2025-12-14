@@ -20,7 +20,9 @@ async function bootstrap() {
     .setTitle('IronTrace API')
     .setDescription('Body measurement tracking API')
     .setVersion('1.0')
+    .addTag('auth')
     .addTag('measurements')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
