@@ -11,6 +11,6 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => ({
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_NAME || 'irontrace',
   entities: [BodyPart, MeasurementLog, MeasurementValue],
-  synchronize: true, // Only for development
+  synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
 });

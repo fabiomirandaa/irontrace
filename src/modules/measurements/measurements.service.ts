@@ -24,11 +24,11 @@ export class MeasurementsService {
     await queryRunner.startTransaction();
 
     try {
-      // Validate body parts exist
+      // Validate body parts exist (within transaction)
       const bodyPartIds = createMeasurementDto.values.map((v) => v.bodyPartId);
       const uniqueBodyPartIds = [...new Set(bodyPartIds)];
-      const bodyParts = await this.bodyPartRepository
-        .createQueryBuilder('bodyPart')
+      const bodyParts = await queryRunner.manager
+        .createQueryBuilder(BodyPart, 'bodyPart')
         .where('bodyPart.id IN (:...ids)', { ids: uniqueBodyPartIds })
         .getMany();
 
