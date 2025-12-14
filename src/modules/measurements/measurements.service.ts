@@ -26,9 +26,13 @@ export class MeasurementsService {
     try {
       // Validate body parts exist
       const bodyPartIds = createMeasurementDto.values.map((v) => v.bodyPartId);
-      const bodyParts = await this.bodyPartRepository.findByIds(bodyPartIds);
+      const uniqueBodyPartIds = [...new Set(bodyPartIds)];
+      const bodyParts = await this.bodyPartRepository
+        .createQueryBuilder('bodyPart')
+        .where('bodyPart.id IN (:...ids)', { ids: uniqueBodyPartIds })
+        .getMany();
 
-      if (bodyParts.length !== bodyPartIds.length) {
+      if (bodyParts.length !== uniqueBodyPartIds.length) {
         throw new NotFoundException('One or more body parts not found');
       }
 
