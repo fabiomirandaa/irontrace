@@ -4,6 +4,7 @@ import { MeasurementLog } from '../entities/measurement-log.entity';
 import { MeasurementValue } from '../entities/measurement-value.entity';
 import { User } from '../entities/user.entity';
 
+// TODO: Criar uma configuração mais decente aqui, senão vai dar merda. Depois uso melhor o .env
 export const getDatabaseConfig = (): TypeOrmModuleOptions => ({
   type: 'postgres',
   host: process.env.DB_HOST || 'localhost',
